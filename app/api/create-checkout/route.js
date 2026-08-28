@@ -8,25 +8,31 @@ function getBaseUrl() {
 }
 
 export async function POST(request) {
-  const { name, amount } = await request.json();
-  const baseUrl = getBaseUrl();
+  try {
+    const { name, amount } = await request.json();
+    const baseUrl = getBaseUrl();
 
-  const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    line_items: [
-      {
-        price_data: {
-          currency: 'usd',
-          product_data: { name: `Bill share — ${name}` },
-          unit_amount: Math.round(amount * 100),
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [
+        {
+          price_data: {
+            currency: 'usd',
+            product_data: { name: `Bill share — ${name}` },
+            unit_amount: Math.round(amount * 100),
+          },
+          quantity: 1,
         },
-        quantity: 1,
-      },
-    ],
-    mode: 'payment',
-    success_url: `${baseUrl}/success?name=${encodeURIComponent(name)}`,
-    cancel_url: `${baseUrl}`,
-  });
+      ],
+      mode: 'payment',
+      success_url: `${baseUrl}/success?name=${encodeURIComponent(name)}`,
+      cancel_url: `${baseUrl}`,
+    });
 
-  return NextResponse.json({ url: session.url });
+    return NextResponse.json({ url: session.url });
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : 'Unable to create checkout session.';
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }
