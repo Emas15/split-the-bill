@@ -1,47 +1,34 @@
-import { NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { NextResponse } from 'next/server';
+import stripe from '@/lib/stripe';
+
+function getBaseUrl() {
+  if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return 'http://localhost:3000';
+}
 
 export async function POST(request) {
-  try {
-    const body = await request.json();
-    const name = typeof body.name === "string" ? body.name.trim() : "";
-    const paidId = typeof body.paidId === "string" ? body.paidId.trim() : "";
-    const amount = Number(body.amount);
+  const { name, amount } = await request.json();
+  const baseUrl = getBaseUrl();
 
-    if (!name) {
-      return NextResponse.json({ error: "Name is required." }, { status: 400 });
-    }
-
-    if (!Number.isFinite(amount) || amount <= 0) {
-      return NextResponse.json(
-        { error: "Amount must be a positive number." },
-        { status: 400 },
-      );
-    }
-
-    const successParams = new URLSearchParams({ paid: name });
-    if (paidId) {
-      successParams.set("paidId", paidId);
-    }
-
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      line_items: [
-        {
-          price_data: {
-            currency: "usd",
-            product_data: {
-              name,
-            },
-            unit_amount: Math.round(amount * 100),
-          },
-          quantity: 1,
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: [
+      {
+        price_data: {
+          currency: 'usd',
+          product_data: { name: `Bill share — ${name}` },
+          unit_amount: Math.round(amount * 100),
         },
-      ],
-      success_url: `http://localhost:3000/?${successParams.toString()}`,
-      cancel_url: "http://localhost:3000",
-    });
+        quantity: 1,
+      },
+    ],
+    mode: 'payment',
+    success_url: `${baseUrl}/success?name=${encodeURIComponent(name)}`,
+    cancel_url: `${baseUrl}`,
+  });
 
+<<<<<<< HEAD
     return NextResponse.json({ url: session.url });
   } catch (error) {
     const message =
@@ -50,4 +37,7 @@ export async function POST(request) {
         : "Unable to create checkout session.";
     return NextResponse.json({ error: message }, { status: 500 });
   }
+=======
+  return NextResponse.json({ url: session.url });
+>>>>>>> 8c2cc6de50ba16273f090a579c601cf905cfd7a7
 }
