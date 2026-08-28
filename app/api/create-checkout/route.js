@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import stripe from "@/lib/stripe";
-
+import { stripe } from '@/lib/stripe';
 function getBaseUrl() {
   if (process.env.NEXT_PUBLIC_BASE_URL) return process.env.NEXT_PUBLIC_BASE_URL;
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
