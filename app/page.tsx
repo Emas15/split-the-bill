@@ -394,31 +394,40 @@ export default function Home() {
     paidNames.length > 0;
 
   const inputClassName =
-    "mt-1.5 w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2.5 text-zinc-900 outline-none placeholder:text-zinc-400 focus:border-emerald-400 focus:bg-white focus:ring-2 focus:ring-emerald-100";
+    "mt-1.5 w-full rounded-xl border border-emerald-300/20 bg-black/20 px-3 py-2.5 text-white outline-none placeholder:text-emerald-100/30 backdrop-blur-sm transition focus:border-emerald-400/60 focus:bg-black/30 focus:ring-2 focus:ring-emerald-400/30";
 
   return (
-    <main className="flex min-h-screen items-start justify-center bg-zinc-100 px-4 py-12 font-[family-name:var(--font-geist-sans)] sm:py-16">
-      <div className="w-full max-w-lg space-y-6">
-        <header className="px-1">
-          <h1 className="text-3xl font-semibold tracking-tight text-zinc-900 sm:text-4xl">
-            Let&apos;s split the bill
+    <main
+      className="min-h-screen px-4 py-12 font-[family-name:var(--font-geist-sans)] text-white sm:py-16"
+      style={{
+        backgroundColor: "#0f3d24",
+        backgroundImage: `
+          radial-gradient(circle at top, rgba(52,211,153,0.25), transparent 55%),
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ctext x='10' y='40' font-size='34' fill='%2334d399' fill-opacity='0.08' font-family='Arial' font-weight='bold'%3E%24%3C/text%3E%3Ctext x='65' y='95' font-size='28' fill='%2322c55e' fill-opacity='0.07' font-family='Arial' font-weight='bold'%3E%24%3C/text%3E%3C/svg%3E")
+        `,
+      }}
+    >
+      <div className="mx-auto w-full max-w-lg space-y-6">
+        <header className="px-1 text-center sm:text-left">
+          <h1 className="bg-gradient-to-r from-emerald-300 via-green-400 to-lime-300 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent drop-shadow-[0_0_25px_rgba(52,211,153,0.35)] sm:text-5xl">
+            💵 Let&apos;s split the bill
           </h1>
-          <p className="mt-2 max-w-md text-zinc-600">
+          <p className="mt-2 max-w-md text-emerald-100/70 sm:mx-0 mx-auto">
             Enter the total, how many people are splitting, and their names.
             We&apos;ll do the math.
           </p>
         </header>
 
         {successMessage && (
-          <p className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-800">
+          <p className="animate-[fadeIn_0.3s_ease-out] rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-sm font-medium text-emerald-200 shadow-[0_0_20px_rgba(52,211,153,0.2)] backdrop-blur-md">
             {successMessage}
           </p>
         )}
 
-        <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+        <section className="rounded-3xl border border-emerald-300/15 bg-emerald-950/40 p-6 shadow-[0_0_40px_rgba(16,185,129,0.12)] backdrop-blur-xl transition hover:border-emerald-300/30">
           <form onSubmit={handleSubmit} className="space-y-5">
             <label className="block">
-              <span className="text-sm font-medium text-zinc-800">
+              <span className="text-sm font-semibold text-emerald-100">
                 Total bill amount
               </span>
               <input
@@ -437,7 +446,7 @@ export default function Home() {
             </label>
 
             <label className="block">
-              <span className="text-sm font-medium text-zinc-800">
+              <span className="text-sm font-semibold text-emerald-100">
                 Number of people
               </span>
               <input
@@ -454,7 +463,7 @@ export default function Home() {
 
             {count > 0 && (
               <fieldset className="space-y-3">
-                <legend className="text-sm font-medium text-zinc-800">
+                <legend className="text-sm font-semibold text-emerald-100">
                   Names
                 </legend>
                 {names.map((name, index) => (
@@ -472,19 +481,23 @@ export default function Home() {
               </fieldset>
             )}
 
-            {error && <p className="text-sm text-red-600">{error}</p>}
+            {error && (
+              <p className="rounded-xl border border-red-400/30 bg-red-400/10 px-3 py-2 text-sm text-red-300">
+                {error}
+              </p>
+            )}
 
             <button
               type="submit"
-              className="w-full rounded-xl bg-zinc-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-zinc-800"
+              className="w-full rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 px-4 py-3 text-sm font-bold text-white shadow-[0_0_20px_rgba(16,185,129,0.4)] transition hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] active:scale-[0.98]"
             >
-              Split bill
+              💰 Split bill
             </button>
             {canReset && (
               <button
                 type="button"
                 onClick={handleReset}
-                className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-sm font-medium text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50"
+                className="w-full rounded-xl border border-emerald-300/20 bg-black/20 px-4 py-2.5 text-sm font-medium text-emerald-100 transition hover:border-emerald-300/40 hover:bg-black/30"
               >
                 Start a new split
               </button>
@@ -493,15 +506,15 @@ export default function Home() {
         </section>
 
         {shares && (
-          <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
+          <section className="rounded-3xl border border-emerald-300/15 bg-emerald-950/40 p-6 shadow-[0_0_40px_rgba(16,185,129,0.1)] backdrop-blur-xl">
             <div className="flex items-end justify-between gap-3">
-              <h2 className="text-lg font-semibold text-zinc-900">Each share</h2>
-              <p className="text-sm font-medium text-zinc-600">
+              <h2 className="text-lg font-bold text-white">Each share</h2>
+              <p className="text-sm font-semibold text-lime-300">
                 {paidCount} of {shares.length} paid
               </p>
             </div>
             <div
-              className="mt-3 h-2.5 overflow-hidden rounded-full bg-zinc-200"
+              className="mt-3 h-3 overflow-hidden rounded-full bg-black/30"
               role="progressbar"
               aria-label="Payment progress"
               aria-valuemin={0}
@@ -509,7 +522,7 @@ export default function Home() {
               aria-valuenow={paidCount}
             >
               <div
-                className="h-full rounded-full bg-emerald-500 transition-[width] duration-300 ease-out"
+                className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-lime-400 shadow-[0_0_15px_rgba(163,230,53,0.6)] transition-[width] duration-500 ease-out"
                 style={{ width: `${paidPercent}%` }}
               />
             </div>
@@ -521,19 +534,23 @@ export default function Home() {
                 return (
                   <li
                     key={`${index}-${share.name}`}
-                    className="rounded-xl border border-zinc-100 bg-zinc-50 px-4 py-3"
+                    className={`rounded-2xl border px-4 py-3 transition ${
+                      isPaid
+                        ? "border-emerald-400/40 bg-emerald-400/10"
+                        : "border-emerald-300/15 bg-black/20 hover:border-emerald-300/30"
+                    }`}
                   >
                     <div className="flex items-start justify-between gap-3">
                       <span className="min-w-0">
-                        <span className="block truncate font-medium text-zinc-900">
+                        <span className="block truncate font-semibold text-white">
                           {share.name}
                         </span>
-                        <span className="text-sm text-zinc-500">
+                        <span className="text-sm text-emerald-200/70">
                           {formatMoney(share.amount)}
                         </span>
                       </span>
                       {isPaid && (
-                        <span className="shrink-0 rounded-full bg-emerald-100 px-2.5 py-1 text-sm font-medium text-emerald-800">
+                        <span className="shrink-0 animate-[popIn_0.3s_ease-out] rounded-full bg-emerald-400/20 px-2.5 py-1 text-sm font-semibold text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.3)]">
                           Paid ✅
                         </span>
                       )}
@@ -542,10 +559,10 @@ export default function Home() {
                       <button
                         type="button"
                         onClick={() => copyPaymentUrl(share)}
-                        className="mt-3 w-full rounded-lg bg-zinc-900 px-3 py-2 text-sm font-medium text-white hover:bg-zinc-800 sm:w-auto"
+                        className="mt-3 w-full rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 px-3 py-2 text-sm font-semibold text-white shadow-[0_0_15px_rgba(34,197,94,0.3)] transition hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(34,197,94,0.5)] active:scale-[0.98] sm:w-auto"
                         aria-label={`Copy ${share.name} payment link`}
                       >
-                        {copiedId === share.id ? "Copied!" : "Copy Link"}
+                        {copiedId === share.id ? "Copied! ✓" : "🔗 Copy Link"}
                       </button>
                     )}
                   </li>
@@ -556,23 +573,21 @@ export default function Home() {
             <button
               type="button"
               onClick={handleReset}
-              className={`mt-5 w-full rounded-xl px-4 py-2.5 text-sm font-medium transition ${
+              className={`mt-5 w-full rounded-xl px-4 py-2.5 text-sm font-bold transition ${
                 allPaid
-                  ? "bg-emerald-600 text-white hover:bg-emerald-700"
-                  : "border border-zinc-200 bg-white text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50"
+                  ? "bg-gradient-to-r from-lime-500 to-emerald-500 text-white shadow-[0_0_20px_rgba(163,230,53,0.4)] hover:scale-[1.02]"
+                  : "border border-emerald-300/20 bg-black/20 text-emerald-100 hover:border-emerald-300/40 hover:bg-black/30"
               }`}
             >
-              {allPaid ? "All paid - start a new split" : "Start a new split"}
+              {allPaid ? "🎉 All paid — start a new split" : "Start a new split"}
             </button>
           </section>
         )}
 
         {history.length > 0 && (
-          <section className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-zinc-900">
-              Previous splits
-            </h2>
-            <p className="mt-1 text-sm text-zinc-500">
+          <section className="rounded-3xl border border-emerald-300/15 bg-emerald-950/40 p-6 shadow-[0_0_40px_rgba(16,185,129,0.08)] backdrop-blur-xl">
+            <h2 className="text-lg font-bold text-white">Previous splits</h2>
+            <p className="mt-1 text-sm text-emerald-200/50">
               Saved when you start a new split.
             </p>
             <ul className="mt-4 space-y-3">
@@ -583,17 +598,17 @@ export default function Home() {
                 return (
                   <li
                     key={entry.id}
-                    className="rounded-xl border border-zinc-100 bg-zinc-50 px-4 py-3"
+                    className="rounded-2xl border border-emerald-300/15 bg-black/20 px-4 py-3 transition hover:border-emerald-300/30"
                   >
                     <div className="flex items-baseline justify-between gap-3">
-                      <span className="text-sm font-medium text-zinc-900">
+                      <span className="text-sm font-semibold text-white">
                         {formatHistoryDate(entry.savedAt)}
                       </span>
-                      <span className="text-sm font-medium text-zinc-700">
+                      <span className="text-sm font-semibold text-lime-300">
                         {formatMoney(entry.total)}
                       </span>
                     </div>
-                    <p className="mt-1 text-sm text-zinc-500">
+                    <p className="mt-1 text-sm text-emerald-200/50">
                       {entryPaid} of {entry.people.length} paid
                       {entry.people.length > 0
                         ? ` · ${entry.people.map((person) => person.name).join(", ")}`
@@ -602,7 +617,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={() => deleteHistoryEntry(entry.id)}
-                      className="mt-2 text-sm font-medium text-red-600 hover:text-red-700"
+                      className="mt-2 text-sm font-medium text-red-400 transition hover:text-red-300"
                       aria-label={`Delete split from ${formatHistoryDate(entry.savedAt)}`}
                     >
                       Delete
