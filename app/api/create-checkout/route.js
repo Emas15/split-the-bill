@@ -24,7 +24,7 @@ export async function POST(request) {
         },
       ],
       mode: "payment",
-      success_url: `${baseUrl}/success?name=${encodeURIComponent(name)}`,
+      success_url: `${baseUrl}/success?name=${encodeURIComponent(name)}&redirect=true`,
       cancel_url: `${baseUrl}`,
     });
 
