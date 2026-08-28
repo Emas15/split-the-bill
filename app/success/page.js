@@ -1,12 +1,19 @@
 'use client';
 
-import { Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
+import { Suspense, useEffect } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 function SuccessContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const name = searchParams.get('name') || 'there';
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.push(`/?paid=${encodeURIComponent(name)}`);
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [name, router]);
 
   return (
     <main style={{ maxWidth: '480px', margin: '80px auto', textAlign: 'center', fontFamily: 'sans-serif' }}>
@@ -15,11 +22,8 @@ function SuccessContent() {
         Payment successful, {name}!
       </h1>
       <p style={{ color: '#666', marginTop: '8px' }}>
-        Your share of the bill has been paid.
+        Redirecting you back to the bill...
       </p>
-      <Link href="/" style={{ display: 'inline-block', marginTop: '24px', color: '#000', textDecoration: 'underline' }}>
-        ← Back to bill
-      </Link>
     </main>
   );
 }
