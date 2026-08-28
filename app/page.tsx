@@ -287,6 +287,10 @@ export default function Home() {
     setCopiedId(null);
   }
 
+  function deleteHistoryEntry(id: string) {
+    setHistory((prev) => prev.filter((entry) => entry.id !== id));
+  }
+
   function handleReset() {
     if (shares && shares.length > 0) {
       const bill = Number(total);
@@ -595,6 +599,14 @@ export default function Home() {
                         ? ` · ${entry.people.map((person) => person.name).join(", ")}`
                         : ""}
                     </p>
+                    <button
+                      type="button"
+                      onClick={() => deleteHistoryEntry(entry.id)}
+                      className="mt-2 text-sm font-medium text-red-600 hover:text-red-700"
+                      aria-label={`Delete split from ${formatHistoryDate(entry.savedAt)}`}
+                    >
+                      Delete
+                    </button>
                   </li>
                 );
               })}
