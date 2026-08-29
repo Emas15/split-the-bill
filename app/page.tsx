@@ -394,265 +394,229 @@ export default function Home() {
     paidNames.length > 0;
 
   const inputClassName =
-    "mt-1.5 w-full rounded-xl border border-emerald-300/20 bg-black/20 px-3 py-2.5 text-white outline-none placeholder:text-emerald-100/30 backdrop-blur-sm transition focus:border-emerald-400/60 focus:bg-black/30 focus:ring-2 focus:ring-emerald-400/30";
-
-  const glassCardClassName =
-    "relative overflow-hidden rounded-3xl border border-emerald-300/20 bg-emerald-950/30 p-6 backdrop-blur-2xl transition hover:border-emerald-300/40 [animation:glowPulse_5s_ease-in-out_infinite]";
+    "mt-1.5 w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-white outline-none placeholder:text-zinc-500 backdrop-blur-sm transition focus:border-fuchsia-400/60 focus:bg-white/10 focus:ring-2 focus:ring-fuchsia-400/30";
 
   return (
-    <main
-      className="min-h-screen px-4 py-12 font-[family-name:var(--font-geist-sans)] text-white sm:py-16"
-      style={{
-        backgroundColor: "#0f3d24",
-        backgroundImage: `
-          radial-gradient(circle at top, rgba(52,211,153,0.25), transparent 55%),
-          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ctext x='10' y='40' font-size='34' fill='%2334d399' fill-opacity='0.08' font-family='Arial' font-weight='bold'%3E%24%3C/text%3E%3Ctext x='65' y='95' font-size='28' fill='%2322c55e' fill-opacity='0.07' font-family='Arial' font-weight='bold'%3E%24%3C/text%3E%3C/svg%3E")
-        `,
-      }}
-    >
+    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#1e1b4b,_#0a0a0f_60%)] px-4 py-12 font-[family-name:var(--font-geist-sans)] text-white sm:py-16">
       <div className="mx-auto w-full max-w-lg space-y-6">
-        <header className="relative overflow-hidden rounded-3xl px-1 py-6 text-center sm:text-left">
-          <span className="pointer-events-none absolute left-4 top-2 text-2xl opacity-20 [animation:floatUp_4s_ease-in-out_infinite]">
-            $
-          </span>
-          <span className="pointer-events-none absolute right-8 top-8 text-xl opacity-15 [animation:floatUp_5s_ease-in-out_infinite_0.5s]">
-            $
-          </span>
-          <span className="pointer-events-none absolute bottom-2 right-20 text-lg opacity-10 [animation:floatUp_3.5s_ease-in-out_infinite_1s]">
-            $
-          </span>
-
-          <div className="flex items-center justify-center gap-3 sm:justify-start">
-            <span className="inline-block text-5xl sm:text-6xl [animation:pound_2.2s_ease-in-out_infinite]">
-              💰
-            </span>
-            <h1 className="bg-gradient-to-r from-emerald-300 via-green-400 to-lime-300 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent drop-shadow-[0_0_25px_rgba(52,211,153,0.35)] sm:text-5xl">
-              Let&apos;s split the bill
-            </h1>
-          </div>
-          <p className="mt-2 max-w-md text-emerald-100/70 sm:mx-0 mx-auto">
+        <header className="px-1 text-center sm:text-left">
+          <h1 className="bg-gradient-to-r from-fuchsia-400 via-purple-400 to-cyan-300 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent drop-shadow-[0_0_25px_rgba(217,70,239,0.35)] sm:text-5xl">
+            Let&apos;s split the bill
+          </h1>
+          <p className="mt-2 max-w-md text-zinc-400 sm:mx-0 mx-auto">
             Enter the total, how many people are splitting, and their names.
             We&apos;ll do the math.
           </p>
         </header>
 
         {successMessage && (
-          <p className="animate-[fadeIn_0.3s_ease-out] rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-sm font-medium text-emerald-200 shadow-[0_0_20px_rgba(52,211,153,0.2)] backdrop-blur-md">
+          <p className="animate-[fadeIn_0.3s_ease-out] rounded-2xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-sm font-medium text-emerald-300 shadow-[0_0_20px_rgba(52,211,153,0.15)] backdrop-blur-md">
             {successMessage}
           </p>
         )}
 
-        <section className={glassCardClassName}>
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.06] via-transparent to-transparent" />
-          <div className="relative">
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <label className="block">
-                <span className="text-sm font-semibold text-emerald-100">
-                  Total bill amount
-                </span>
-                <input
-                  type="number"
-                  inputMode="decimal"
-                  min="0"
-                  step="0.01"
-                  value={total}
-                  onChange={(event) => {
-                    setTotal(event.target.value);
-                    setShares(null);
-                  }}
-                  placeholder="0.00"
-                  className={inputClassName}
-                />
-              </label>
+        <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_0_40px_rgba(168,85,247,0.08)] backdrop-blur-xl transition hover:border-white/20">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <label className="block">
+              <span className="text-sm font-semibold text-zinc-300">
+                Total bill amount
+              </span>
+              <input
+                type="number"
+                inputMode="decimal"
+                min="0"
+                step="0.01"
+                value={total}
+                onChange={(event) => {
+                  setTotal(event.target.value);
+                  setShares(null);
+                }}
+                placeholder="0.00"
+                className={inputClassName}
+              />
+            </label>
 
-              <label className="block">
-                <span className="text-sm font-semibold text-emerald-100">
-                  Number of people
-                </span>
-                <input
-                  type="number"
-                  inputMode="numeric"
-                  min="1"
-                  max={MAX_PEOPLE}
-                  step="1"
-                  value={peopleCount}
-                  onChange={(event) => handlePeopleChange(event.target.value)}
-                  className={inputClassName}
-                />
-              </label>
+            <label className="block">
+              <span className="text-sm font-semibold text-zinc-300">
+                Number of people
+              </span>
+              <input
+                type="number"
+                inputMode="numeric"
+                min="1"
+                max={MAX_PEOPLE}
+                step="1"
+                value={peopleCount}
+                onChange={(event) => handlePeopleChange(event.target.value)}
+                className={inputClassName}
+              />
+            </label>
 
-              {count > 0 && (
-                <fieldset className="space-y-3">
-                  <legend className="text-sm font-semibold text-emerald-100">
-                    Names
-                  </legend>
-                  {names.map((name, index) => (
-                    <input
-                      key={index}
-                      type="text"
-                      value={name}
-                      onChange={(event) =>
-                        handleNameChange(index, event.target.value)
-                      }
-                      placeholder={`Person ${index + 1}`}
-                      className={`${inputClassName} mt-0`}
-                    />
-                  ))}
-                </fieldset>
-              )}
+            {count > 0 && (
+              <fieldset className="space-y-3">
+                <legend className="text-sm font-semibold text-zinc-300">
+                  Names
+                </legend>
+                {names.map((name, index) => (
+                  <input
+                    key={index}
+                    type="text"
+                    value={name}
+                    onChange={(event) =>
+                      handleNameChange(index, event.target.value)
+                    }
+                    placeholder={`Person ${index + 1}`}
+                    className={`${inputClassName} mt-0`}
+                  />
+                ))}
+              </fieldset>
+            )}
 
-              {error && (
-                <p className="rounded-xl border border-red-400/30 bg-red-400/10 px-3 py-2 text-sm text-red-300">
-                  {error}
-                </p>
-              )}
+            {error && (
+              <p className="rounded-xl border border-red-400/30 bg-red-400/10 px-3 py-2 text-sm text-red-300">
+                {error}
+              </p>
+            )}
 
-              <button
-                type="submit"
-                className="w-full rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 px-4 py-3 text-sm font-bold text-white shadow-[0_0_20px_rgba(16,185,129,0.4)] transition hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] active:scale-[0.98]"
-              >
-                💵 Split bill
-              </button>
-              {canReset && (
-                <button
-                  type="button"
-                  onClick={handleReset}
-                  className="w-full rounded-xl border border-emerald-300/20 bg-black/20 px-4 py-2.5 text-sm font-medium text-emerald-100 transition hover:border-emerald-300/40 hover:bg-black/30"
-                >
-                  Start a new split
-                </button>
-              )}
-            </form>
-          </div>
-        </section>
-
-        {shares && (
-          <section className={glassCardClassName}>
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.06] via-transparent to-transparent" />
-            <div className="relative">
-              <div className="flex items-end justify-between gap-3">
-                <h2 className="text-lg font-bold text-white">Each share</h2>
-                <p className="text-sm font-semibold text-lime-300">
-                  {paidCount} of {shares.length} paid
-                </p>
-              </div>
-              <div
-                className="mt-3 h-3 overflow-hidden rounded-full bg-black/30"
-                role="progressbar"
-                aria-label="Payment progress"
-                aria-valuemin={0}
-                aria-valuemax={shares.length}
-                aria-valuenow={paidCount}
-              >
-                <div
-                  className="h-full rounded-full bg-[length:200%_100%] bg-gradient-to-r from-emerald-400 via-lime-300 to-emerald-400 shadow-[0_0_15px_rgba(163,230,53,0.6)] transition-[width] duration-500 ease-out [animation:shimmer_2.5s_linear_infinite]"
-                  style={{ width: `${paidPercent}%` }}
-                />
-              </div>
-
-              <ul className="mt-5 space-y-3">
-                {shares.map((share, index) => {
-                  const isPaid = isSharePaid(share);
-
-                  return (
-                    <li
-                      key={`${index}-${share.name}`}
-                      className={`rounded-2xl border px-4 py-3 transition ${
-                        isPaid
-                          ? "border-emerald-400/40 bg-emerald-400/10"
-                          : "border-emerald-300/15 bg-black/20 hover:border-emerald-300/30"
-                      }`}
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        <span className="min-w-0">
-                          <span className="block truncate font-semibold text-white">
-                            {share.name}
-                          </span>
-                          <span className="text-sm text-emerald-200/70">
-                            {formatMoney(share.amount)}
-                          </span>
-                        </span>
-                        {isPaid && (
-                          <span className="shrink-0 animate-[popIn_0.3s_ease-out] rounded-full bg-emerald-400/20 px-2.5 py-1 text-sm font-semibold text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.3)]">
-                            Paid ✅
-                          </span>
-                        )}
-                      </div>
-                      {!isPaid && (
-                        <button
-                          type="button"
-                          onClick={() => copyPaymentUrl(share)}
-                          className="mt-3 w-full rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 px-3 py-2 text-sm font-semibold text-white shadow-[0_0_15px_rgba(34,197,94,0.3)] transition hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(34,197,94,0.5)] active:scale-[0.98] sm:w-auto"
-                          aria-label={`Copy ${share.name} payment link`}
-                        >
-                          {copiedId === share.id ? "Copied! ✓" : "🔗 Copy Link"}
-                        </button>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
-
+            <button
+              type="submit"
+              className="w-full rounded-xl bg-gradient-to-r from-fuchsia-500 to-purple-600 px-4 py-3 text-sm font-bold text-white shadow-[0_0_20px_rgba(217,70,239,0.4)] transition hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(217,70,239,0.6)] active:scale-[0.98]"
+            >
+              Split bill
+            </button>
+            {canReset && (
               <button
                 type="button"
                 onClick={handleReset}
-                className={`mt-5 w-full rounded-xl px-4 py-2.5 text-sm font-bold transition ${
-                  allPaid
-                    ? "bg-gradient-to-r from-lime-500 to-emerald-500 text-white shadow-[0_0_20px_rgba(163,230,53,0.4)] hover:scale-[1.02]"
-                    : "border border-emerald-300/20 bg-black/20 text-emerald-100 hover:border-emerald-300/40 hover:bg-black/30"
-                }`}
+                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-zinc-300 transition hover:border-white/20 hover:bg-white/10"
               >
-                {allPaid ? "🎉 All paid — start a new split" : "Start a new split"}
+                Start a new split
               </button>
+            )}
+          </form>
+        </section>
+
+        {shares && (
+          <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_0_40px_rgba(34,211,238,0.08)] backdrop-blur-xl">
+            <div className="flex items-end justify-between gap-3">
+              <h2 className="text-lg font-bold text-white">Each share</h2>
+              <p className="text-sm font-semibold text-cyan-300">
+                {paidCount} of {shares.length} paid
+              </p>
             </div>
+            <div
+              className="mt-3 h-3 overflow-hidden rounded-full bg-white/10"
+              role="progressbar"
+              aria-label="Payment progress"
+              aria-valuemin={0}
+              aria-valuemax={shares.length}
+              aria-valuenow={paidCount}
+            >
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400 shadow-[0_0_15px_rgba(52,211,153,0.6)] transition-[width] duration-500 ease-out"
+                style={{ width: `${paidPercent}%` }}
+              />
+            </div>
+
+            <ul className="mt-5 space-y-3">
+              {shares.map((share, index) => {
+                const isPaid = isSharePaid(share);
+
+                return (
+                  <li
+                    key={`${index}-${share.name}`}
+                    className={`rounded-2xl border px-4 py-3 transition ${
+                      isPaid
+                        ? "border-emerald-400/30 bg-emerald-400/5"
+                        : "border-white/10 bg-white/[0.03] hover:border-white/20"
+                    }`}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="min-w-0">
+                        <span className="block truncate font-semibold text-white">
+                          {share.name}
+                        </span>
+                        <span className="text-sm text-zinc-400">
+                          {formatMoney(share.amount)}
+                        </span>
+                      </span>
+                      {isPaid && (
+                        <span className="shrink-0 animate-[popIn_0.3s_ease-out] rounded-full bg-emerald-400/20 px-2.5 py-1 text-sm font-semibold text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.3)]">
+                          Paid ✅
+                        </span>
+                      )}
+                    </div>
+                    {!isPaid && (
+                      <button
+                        type="button"
+                        onClick={() => copyPaymentUrl(share)}
+                        className="mt-3 w-full rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-[0_0_15px_rgba(34,211,238,0.3)] transition hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(34,211,238,0.5)] active:scale-[0.98] sm:w-auto"
+                        aria-label={`Copy ${share.name} payment link`}
+                      >
+                        {copiedId === share.id ? "Copied! ✓" : "Copy Link"}
+                      </button>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+
+            <button
+              type="button"
+              onClick={handleReset}
+              className={`mt-5 w-full rounded-xl px-4 py-2.5 text-sm font-bold transition ${
+                allPaid
+                  ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-[0_0_20px_rgba(52,211,153,0.4)] hover:scale-[1.02]"
+                  : "border border-white/10 bg-white/5 text-zinc-300 hover:border-white/20 hover:bg-white/10"
+              }`}
+            >
+              {allPaid ? "🎉 All paid — start a new split" : "Start a new split"}
+            </button>
           </section>
         )}
 
         {history.length > 0 && (
-          <section className={glassCardClassName}>
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/[0.06] via-transparent to-transparent" />
-            <div className="relative">
-              <h2 className="text-lg font-bold text-white">Previous splits</h2>
-              <p className="mt-1 text-sm text-emerald-200/50">
-                Saved when you start a new split.
-              </p>
-              <ul className="mt-4 space-y-3">
-                {history.map((entry) => {
-                  const entryPaid = entry.people.filter((person) => person.paid)
-                    .length;
+          <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 shadow-[0_0_40px_rgba(168,85,247,0.06)] backdrop-blur-xl">
+            <h2 className="text-lg font-bold text-white">Previous splits</h2>
+            <p className="mt-1 text-sm text-zinc-500">
+              Saved when you start a new split.
+            </p>
+            <ul className="mt-4 space-y-3">
+              {history.map((entry) => {
+                const entryPaid = entry.people.filter((person) => person.paid)
+                  .length;
 
-                  return (
-                    <li
-                      key={entry.id}
-                      className="rounded-2xl border border-emerald-300/15 bg-black/20 px-4 py-3 transition hover:border-emerald-300/30"
+                return (
+                  <li
+                    key={entry.id}
+                    className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3 transition hover:border-white/20"
+                  >
+                    <div className="flex items-baseline justify-between gap-3">
+                      <span className="text-sm font-semibold text-white">
+                        {formatHistoryDate(entry.savedAt)}
+                      </span>
+                      <span className="text-sm font-semibold text-purple-300">
+                        {formatMoney(entry.total)}
+                      </span>
+                    </div>
+                    <p className="mt-1 text-sm text-zinc-500">
+                      {entryPaid} of {entry.people.length} paid
+                      {entry.people.length > 0
+                        ? ` · ${entry.people.map((person) => person.name).join(", ")}`
+                        : ""}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => deleteHistoryEntry(entry.id)}
+                      className="mt-2 text-sm font-medium text-red-400 transition hover:text-red-300"
+                      aria-label={`Delete split from ${formatHistoryDate(entry.savedAt)}`}
                     >
-                      <div className="flex items-baseline justify-between gap-3">
-                        <span className="text-sm font-semibold text-white">
-                          {formatHistoryDate(entry.savedAt)}
-                        </span>
-                        <span className="text-sm font-semibold text-lime-300">
-                          {formatMoney(entry.total)}
-                        </span>
-                      </div>
-                      <p className="mt-1 text-sm text-emerald-200/50">
-                        {entryPaid} of {entry.people.length} paid
-                        {entry.people.length > 0
-                          ? ` · ${entry.people.map((person) => person.name).join(", ")}`
-                          : ""}
-                      </p>
-                      <button
-                        type="button"
-                        onClick={() => deleteHistoryEntry(entry.id)}
-                        className="mt-2 text-sm font-medium text-red-400 transition hover:text-red-300"
-                        aria-label={`Delete split from ${formatHistoryDate(entry.savedAt)}`}
-                      >
-                        Delete
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+                      Delete
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
           </section>
         )}
       </div>
